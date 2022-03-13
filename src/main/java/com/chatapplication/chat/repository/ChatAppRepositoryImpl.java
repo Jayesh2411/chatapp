@@ -2,29 +2,24 @@ package com.chatapplication.chat.repository;
 
 import com.chatapplication.chat.model.Message;
 import com.chatapplication.chat.model.User;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 @Component
 public class ChatAppRepositoryImpl implements ChatAppRepository {
     Logger logger = LoggerFactory.getLogger(ChatAppRepositoryImpl.class);
 
     @Autowired
-    RedisTemplate<String, Object> redisTemplate;
+    RedisTemplate<Object, Object> redisTemplate;
 
 
     @Override
     public void saveUser(User user) {
         try {
-            Map userHash = new ObjectMapper().convertValue(user, Map.class);
-            redisTemplate.opsForHash().put("user", String.valueOf(user.getUserID()), userHash);
+            redisTemplate.opsForHash().put("user", String.valueOf(user.getUserID()), user);
         } catch (Exception e) {
             logger.error("Error saving user to Redis-> " + e.getMessage());
         }
@@ -33,8 +28,7 @@ public class ChatAppRepositoryImpl implements ChatAppRepository {
     @Override
     public void saveMessage(Message message) {
         try {
-            Map messageHash = new ObjectMapper().convertValue(message, Map.class);
-            redisTemplate.opsForHash().put("message", String.valueOf(message.getMessageID()), messageHash);
+            redisTemplate.opsForHash().put("message", String.valueOf(message.getMessageID()), message);
         } catch (Exception e) {
             logger.error("Error saving message to Redis-> " + e.getMessage());
         }
@@ -44,8 +38,7 @@ public class ChatAppRepositoryImpl implements ChatAppRepository {
     public User fetchUser(Integer id) {
         User user = null;
         try {
-            LinkedHashMap userMap = (LinkedHashMap) redisTemplate.opsForHash().get("user", String.valueOf(id));
-            user = new ObjectMapper().convertValue(userMap, User.class);
+            user = (User) redisTemplate.opsForHash().get("user", String.valueOf(id));
             logger.info("Got the user ", user.getUserID());
         } catch (Exception e) {
             logger.error("User not found", e);
@@ -57,10 +50,9 @@ public class ChatAppRepositoryImpl implements ChatAppRepository {
     public Message fetchMessage(Integer id) {
         Message message = null;
         try {
-            LinkedHashMap messageMap = (LinkedHashMap) redisTemplate.opsForHash().get("message", String.valueOf(id));
-            message = new ObjectMapper().convertValue(messageMap, Message.class);
+            message = (Message) redisTemplate.opsForHash().get("message", String.valueOf(id));
         } catch (Exception e) {
-            logger.error("Message not found");
+            logger.error("Message not found", e);
         }
         return message;
     }
@@ -69,9 +61,6 @@ public class ChatAppRepositoryImpl implements ChatAppRepository {
     @Override
     public boolean doesReceiverExist(int receiverID) {
         User user = fetchUser(receiverID);
-        if (user != null) {
-            return true;
-        }
-        return false;
+        return user != null;
     }
 }

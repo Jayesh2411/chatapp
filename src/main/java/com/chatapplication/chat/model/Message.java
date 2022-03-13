@@ -2,8 +2,14 @@ package com.chatapplication.chat.model;
 
 import org.springframework.data.redis.core.RedisHash;
 
+import java.io.Serializable;
+
 @RedisHash("Message")
-public class Message {
+public class Message implements Serializable {
+    /**
+     *
+     */
+    private static final long serialVersionUID = 6562132181617666523L;
     private int messageID;
     private int senderID;
     private int receiverID;
