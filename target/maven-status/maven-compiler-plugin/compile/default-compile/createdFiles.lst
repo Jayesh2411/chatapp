@@ -1,1 +1,9 @@
+com/chatapplication/chat/model/Message.class
+com/chatapplication/chat/model/User.class
+com/chatapplication/chat/controller/ChatAppControllerImpl.class
+com/chatapplication/chat/repository/ChatAppRepository.class
+com/chatapplication/chat/repository/ChatAppRepositoryImpl.class
+com/chatapplication/chat/exceptions/UserNotFoundException.class
+com/chatapplication/chat/service/ChatAppService.class
+com/chatapplication/chat/controller/ChatAppController.class
 com/chatapplication/chat/ChatApplication.class
