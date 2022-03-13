@@ -1,10 +1,16 @@
 package com.chatapplication.chat.model;
 
+import java.io.Serializable;
+
 import org.springframework.data.redis.core.RedisHash;
 
 @RedisHash("User")
-public class User {
-    private int userID;
+public class User implements Serializable {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5144678158684589089L;
+	private int userID;
     private String userName;
     private byte[] profilePicture;
 

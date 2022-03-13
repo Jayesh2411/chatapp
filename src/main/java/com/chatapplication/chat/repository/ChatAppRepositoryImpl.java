@@ -17,7 +17,7 @@ public class ChatAppRepositoryImpl implements ChatAppRepository {
 	Logger logger = LoggerFactory.getLogger(ChatAppRepositoryImpl.class);
 	
 	@Autowired
-    RedisTemplate<String,Object> redisTemplate;
+    RedisTemplate<Object,Object> redisTemplate;
 
 	
     @Override
@@ -33,8 +33,7 @@ public class ChatAppRepositoryImpl implements ChatAppRepository {
     @Override
     public void saveMessage(Message message) {
     	try {
-            Map messageHash = new ObjectMapper().convertValue(message, Map.class);
-            redisTemplate.opsForHash().put("message",String.valueOf(message.getMessageID()), messageHash);
+            redisTemplate.opsForHash().put("message",String.valueOf(message.getMessageID()), message);
         } catch (Exception e) {
         	logger.error("Error saving message to Redis-> "+e.getMessage());
         }
