@@ -1,1 +1,10 @@
+/Users/jayeshsinha/chatapp/src/main/java/com/chatapplication/chat/repository/ChatAppRepository.java
+/Users/jayeshsinha/chatapp/src/main/java/com/chatapplication/chat/controller/ChatAppController.java
+/Users/jayeshsinha/chatapp/src/main/java/com/chatapplication/chat/controller/ChatAppControllerImpl.java
+/Users/jayeshsinha/chatapp/src/main/java/com/chatapplication/chat/model/Message.java
+/Users/jayeshsinha/chatapp/src/main/java/com/chatapplication/chat/exceptions/UserNotFoundException.java
+/Users/jayeshsinha/chatapp/src/main/java/com/chatapplication/chat/repository/ChatAppRepositoryImpl.java
+/Users/jayeshsinha/chatapp/src/main/java/com/chatapplication/chat/service/ChatAppService.java
 /Users/jayeshsinha/chatapp/src/main/java/com/chatapplication/chat/ChatApplication.java
+/Users/jayeshsinha/chatapp/src/main/java/com/chatapplication/chat/config/RedisConfig.java
+/Users/jayeshsinha/chatapp/src/main/java/com/chatapplication/chat/model/User.java

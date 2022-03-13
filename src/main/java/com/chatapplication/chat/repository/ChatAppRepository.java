@@ -8,5 +8,9 @@ public interface ChatAppRepository {
 
     void saveMessage(Message message);
 
+    User fetchUser(Integer id);
+
+    Message fetchMessage(Integer id);
+
     boolean doesReceiverExist(int receiverID);
 }
