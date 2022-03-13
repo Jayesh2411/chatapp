@@ -1,5 +1,8 @@
 package com.chatapplication.chat.model;
 
+import org.springframework.data.redis.core.RedisHash;
+
+@RedisHash("Message")
 public class Message {
     private int messageID;
     private int senderID;
